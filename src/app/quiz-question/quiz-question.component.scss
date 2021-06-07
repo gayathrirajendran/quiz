@@ -1,0 +1,44 @@
+form button {
+  margin-top: 10px;
+  width: 100%;
+}
+
+form .error {
+  font-style: italic;
+  color: red;
+}
+
+form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+form .form-group.row {
+  flex-direction: row;
+}
+
+input, textarea, select {
+  border: 1px solid #ccc;
+  border-width: 1px;;
+  background: unset;
+  box-shadow: unset;
+}
+
+input {
+  height: 30px;
+  line-height: 30px;
+}
+
+select {
+  height: 32px;
+  line-height: 32px;;
+}
+
+.radio-label {
+  line-height: 35px;
+}
+
+hr {
+  border-style: dotted;
+}
