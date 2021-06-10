@@ -1,8 +1,19 @@
 export const USERS = [
+  'Karthik',
+  'Siji',
+  'Saranya',
+  'Swathi',
+  'Bala',
+  'Ajay',
+  'Harika',
   'Ram',
   'Sita',
-  'S3A',
-  'S3B',
-  'Something',
-  'Anything'
+  'Radha',
+  'Mayank',
+  'Gayathri',
+  'Prabhakar',
+  'Ravi',
+  'Thirumaran',
+  'Siddharth',
+  'Bikash'
 ];

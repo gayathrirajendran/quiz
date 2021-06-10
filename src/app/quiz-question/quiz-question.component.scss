@@ -46,6 +46,11 @@ select {
 
 .radio-label {
   line-height: 35px;
+  span, div {
+    flex-basis: 100%;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
 }
 
 hr {

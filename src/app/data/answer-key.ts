@@ -1,6 +1,12 @@
 export const ANSWERS = [
-  '123',
-  'ram@gmail.com',
-  'male',
-  'bike'
+  'option 2',
+  'option 2',
+  '2',
+  'option 1',
+  '1',
+  'option 2',
+  'option 7',
+  'option2',
+  'option1',
+  'Just an opinion question'
 ];

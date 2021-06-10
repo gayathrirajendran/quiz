@@ -21,6 +21,10 @@
     Your score is: {{ userForm.get('userName')?.errors?.testTaken }}
   </div>
 
+  <div *ngIf="userForm.get('userName')?.errors?.invalidUser">
+    Invalid user. Please make sure you are part of UI study group.
+  </div>
+
   <app-quiz-question *ngIf="userForm.valid" [userName]="this.userForm?.get('userName')?.value" [formConfig]="data" (isSubmitted)="computeResults($event)"></app-quiz-question>
 
 </div>

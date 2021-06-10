@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FormConfig } from './../interfaces/form-config.interface';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ANSWERS } from '../data/answer-key';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-quiz-question',
@@ -34,7 +35,7 @@ export class QuizQuestionComponent implements OnInit {
     const formGroup = {};
 
     this.formConfig.forEach(formControl => {
-      formGroup[formControl.controlName] = new FormControl('');
+      formGroup[formControl.controlName] = new FormControl('', Validators.required);
     });
 
     this.form = new FormGroup(formGroup);
@@ -61,7 +62,10 @@ export class QuizQuestionComponent implements OnInit {
   computeScore(): void {
     const submittedVal: any[] = this.form.getRawValue();
     const submittedValues = this.formConfig.map((item) => submittedVal[item.controlName]);
-    this.form.get('score').setValue((submittedValues.filter((element, index) => element === ANSWERS[index])).length);
+    const score = (submittedValues.filter((matter, index) =>
+      this.formConfig[index].controlType !== 'textArea' ? matter === ANSWERS[index] : matter.length > 1
+    )).length;
+    this.form.get('score').setValue(score);
   }
 
   viewResults(): void {

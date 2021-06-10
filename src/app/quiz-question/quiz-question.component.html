@@ -21,8 +21,32 @@
     <ng-container [ngSwitch]="input.controlType">
       <ng-template [ngSwitchCase]="'text'">
         <div class="form-group">
-          <label [for]="input.controlName"> {{input.controlName}}</label>
-          <input [formControlName]="input.controlName" [type]="input.valueType" [name]="input.controlName" [required]="input.validators.required" [minlength]="input.validators.minlength" [maxlength]="input.validators.maxlength" />
+          <label [for]="input.controlName"> {{ i+1 }}. {{input.controlName}}</label>
+          <ng-container *ngIf="input.labelMarkdownElement">
+            <markdown class="variable-binding" [data]="input.labelMarkdownElement"></markdown>
+          </ng-container>
+          <input [formControlName]="input.controlName" [type]="input.valueType" [placeholder]="input.placeholder" [name]="input.controlName" [minlength]="input.validators.minlength" [maxlength]="input.validators.maxlength" />
+          <div class="error" *ngIf="form.get(input.controlName).invalid && (form.get(input.controlName).dirty || form.get(input.controlName).touched)">
+            <div class="error" *ngIf="form.get(input.controlName).errors?.required">
+              Input required
+            </div>
+            <div class="error" *ngIf="form.get(input.controlName).errors?.testTaken">
+              Test already taken.
+            </div>
+          </div>
+        </div>
+        <div>
+
+        </div>
+      </ng-template>
+
+      <ng-template [ngSwitchCase]="'textArea'">
+        <div class="form-group">
+          <label [for]="input.controlName"> {{ i+1 }}. {{input.controlName}}</label>
+          <ng-container *ngIf="input.labelMarkdownElement">
+            <markdown class="variable-binding" [data]="input.labelMarkdownElement"></markdown>
+          </ng-container>
+          <textarea [formControlName]="input.controlName" [placeholder]="input.placeholder"></textarea>
           <div class="error" *ngIf="form.get(input.controlName).invalid && (form.get(input.controlName).dirty || form.get(input.controlName).touched)">
             <div *ngIf="form.get(input.controlName).errors?.required">
               Input required
@@ -39,24 +63,36 @@
 
       <ng-template [ngSwitchCase]="'select'">
         <div class="form-group">
-          <label [for]="input.controlName"> {{input.controlName}}</label>
-          <select [formControlName]="input.controlName" [name]="input.controlName" [id]="input.controlName" [required]="input.validators.required">
+          <label [for]="input.controlName">{{ i+1 }}. {{input.controlName}}</label>
+          <ng-container *ngIf="input.labelMarkdownElement">
+            <markdown class="variable-binding" [data]="input.labelMarkdownElement"></markdown>
+          </ng-container>
+          <select [formControlName]="input.controlName" [name]="input.controlName" [id]="input.controlName">
             <option value="">{{input.placeholder}}</option>
             <option *ngFor="let option of input.options" [value]="option.val">{{option.optionName}}</option>
           </select>
-
-          <div class="error" *ngIf="form.get(input.controlName)?.errors?.testTaken">
-            Test already taken.
+          <div class="error" *ngIf="form.get(input.controlName).invalid && (form.get(input.controlName).dirty || form.get(input.controlName).touched)">
+            <div class="error" *ngIf="form.get(input.controlName).errors?.required">
+              Input required
+            </div>
+            <div class="error" *ngIf="form.get(input.controlName).errors?.testTaken">
+              Test already taken.
+            </div>
           </div>
+
         </div>
       </ng-template>
 
       <ng-template [ngSwitchCase]="'radio'">
         <div class="form-group">
-          <label>{{ input.controlName }}</label>
+          <label>{{ i+1 }}. {{ input.controlName }}</label>
+          <ng-container *ngIf="input.labelMarkdownElement">
+            <markdown class="variable-binding" [data]="input.labelMarkdownElement"></markdown>
+          </ng-container>
           <label [attr.for]="input.controlName + i" *ngFor="let option of input.options; let i = index" class="radio-label form-group row">
             <input [attr.id]="input.controlName + i" [formControlName]="input.controlName" type="radio" [value]="option.val" />
-            <span> {{option.optionName}}</span>
+            <span *ngIf="!option.markdownElement"> {{option.optionName}}</span>
+            <markdown class="variable-binding" [data]="option.markdownElement"></markdown>
           </label>
         </div>
       </ng-template>
@@ -80,6 +116,13 @@
   </ng-container>
 
   <button type="submit" *ngIf="!isResults" [disabled]="form.invalid || submitted">Submit</button>
+
+  <small>
+    Please select answers for the following to submit
+    <ng-container *ngFor="let control of form.controls | invalidOnes">
+      <div>{{ control }}</div>
+    </ng-container>
+  </small>
 
 </form>
 

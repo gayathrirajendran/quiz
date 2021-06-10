@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AsyncValidatorFn, AbstractControl } from '@angular/forms';
 import { timer, Observable } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
+import { USERS } from '../data/users';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,14 @@ export class UserValidators {
         .pipe(
           map(res => {
 
-            const result = res.find((item) => item.userName === control.value);
+            if (USERS.includes(control.value)) {
+              const result = res.find((item) => item.userName === control.value);
 
-            if (result?.userName) {
-              return { testTaken: result.score };
+              if (result?.userName) {
+                return { testTaken: result.score };
+              }
+            } else {
+              return { invalidUser: true };
             }
           })
         );
