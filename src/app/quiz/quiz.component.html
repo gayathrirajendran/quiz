@@ -5,7 +5,7 @@
 <div class="content">
 
   <form [formGroup]="userForm">
-    <label for="user">Employee id</label>
+    <label for="user">Name</label>
     <input list="users" formControlName="userName" id="user">
     <datalist id="users">
       <option [value]="userItem" *ngFor="let userItem of usersList">{{ userItem }}</option>
