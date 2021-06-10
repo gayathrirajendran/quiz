@@ -1,4 +1,26 @@
-<div class="center-div">
-  <app-quiz-question [formConfig]="data"></app-quiz-question>
+<div class="text-center info">
+  **Do not refresh the page while taking the quiz and after submission.**
+</div>
+
+<div class="content">
+
+  <form [formGroup]="userForm">
+    <label for="user">Employee id</label>
+    <input list="users" formControlName="userName" id="user">
+    <datalist id="users">
+      <option [value]="userItem" *ngFor="let userItem of usersList">{{ userItem }}</option>
+    </datalist>
+  </form>
+
+  <div *ngIf="userForm.get('userName')?.status === 'PENDING'">
+    Validating...
+  </div>
+
+  <div *ngIf="userForm.get('userName')?.errors?.testTaken">
+    Test already taken.
+    Your score is: {{ userForm.get('userName')?.errors?.testTaken }}
+  </div>
+
+  <app-quiz-question *ngIf="userForm.valid" [userName]="this.userForm?.get('userName')?.value" [formConfig]="data" (isSubmitted)="computeResults($event)"></app-quiz-question>
 
 </div>

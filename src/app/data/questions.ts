@@ -1,16 +1,25 @@
 import { FormConfig } from '../interfaces/form-config.interface';
 
 export const QUESTIONS: FormConfig[] = [
-  {
-    controlName: 'Username',
-    controlType: 'text',
-    valueType: 'text',
-    placeholder: 'Enter username',
-    validators: {
-      required: true,
-      minlength: 5
-    }
-  },
+  // {
+  //   controlName: 'Username',
+  //   controlType: 'select',
+  //   valueType: 'select',
+  //   placeholder: 'Enter username',
+  //   options: [
+  //     {
+  //       optionName: 'Ram',
+  //       val: 'Ram'
+  //     },
+  //     {
+  //       optionName: 'Sita',
+  //       val: 'Sita'
+  //     }
+  //   ],
+  //   validators: {
+  //     required: true,
+  //   }
+  // },
   {
     controlName: 'Telephone',
     placeholder: 'Enter Phone',
@@ -18,8 +27,6 @@ export const QUESTIONS: FormConfig[] = [
     controlType: 'text',
     validators: {
       required: true,
-      minlength: 7,
-      maxlength: 10
     }
   },
   {

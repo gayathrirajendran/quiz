@@ -1,18 +1,39 @@
-<form [formGroup]="form" (submit)="submitForm()">
-  <ng-template ngFor let-input [ngForOf]="formConfig">
+<div *ngIf="isResults">
+
+  Results:
+  <table>
+    <tr>
+      <td>Employee Id</td>
+      <td>{{ form.value.userName }}</td>
+    </tr>
+
+    <tr>
+      <td>Score</td>
+      <td>{{form.value.score}}</td>
+    </tr>
+
+  </table>
+
+</div>
+
+<form [formGroup]="form" (submit)="submitForm($event)">
+  <ng-container *ngFor="let input of formConfig; let i = index">
     <ng-container [ngSwitch]="input.controlType">
       <ng-template [ngSwitchCase]="'text'">
         <div class="form-group">
           <label [for]="input.controlName"> {{input.controlName}}</label>
           <input [formControlName]="input.controlName" [type]="input.valueType" [name]="input.controlName" [required]="input.validators.required" [minlength]="input.validators.minlength" [maxlength]="input.validators.maxlength" />
           <div class="error" *ngIf="form.get(input.controlName).invalid && (form.get(input.controlName).dirty || form.get(input.controlName).touched)">
-            <div *ngIf="form.get(input.controlName).errors.required">
+            <div *ngIf="form.get(input.controlName).errors?.required">
               Input required
             </div>
-            <div *ngIf="form.get(input.controlName).errors.minlength">
-              Minimum length is {{input.validators.minlength}}
+            <div *ngIf="form.get(input.controlName).errors?.testTaken">
+              Test already taken.
             </div>
           </div>
+        </div>
+        <div>
+
         </div>
       </ng-template>
 
@@ -23,25 +44,47 @@
             <option value="">{{input.placeholder}}</option>
             <option *ngFor="let option of input.options" [value]="option.val">{{option.optionName}}</option>
           </select>
+
+          <div class="error" *ngIf="form.get(input.controlName)?.errors?.testTaken">
+            Test already taken.
+          </div>
         </div>
       </ng-template>
 
       <ng-template [ngSwitchCase]="'radio'">
-        <label [attr.for]="input.controlName + i" *ngFor="let option of input.options; let i = index" class="radio-label form-group row">
-          <input [attr.id]="input.controlName + i" [formControlName]="input.controlName" type="radio" [value]="i" />
-          <span> {{option.optionName}} {{option.val }}</span>
-        </label>
+        <div class="form-group">
+          <label>{{ input.controlName }}</label>
+          <label [attr.for]="input.controlName + i" *ngFor="let option of input.options; let i = index" class="radio-label form-group row">
+            <input [attr.id]="input.controlName + i" [formControlName]="input.controlName" type="radio" [value]="option.val" />
+            <span> {{option.optionName}}</span>
+          </label>
+        </div>
       </ng-template>
+
+      <div *ngIf="isResults">
+        <table>
+          <tr>
+            <td>Your answer: </td>
+            <td>{{ form.get(input.controlName).value }}</td>
+          </tr>
+          <tr>
+            <td>Correct answer:</td>
+            <td>{{ ANSWERS[i] }}</td>
+          </tr>
+        </table>
+      </div>
     </ng-container>
 
     <br>
 
-  </ng-template>
+  </ng-container>
 
+  <button type="submit" *ngIf="!isResults" [disabled]="form.invalid || submitted">Submit</button>
 
-
-  <button type="submit" [disabled]="form.invalid">Submit</button>
-  <div *ngIf="submitted">
-    <pre>{{form.value | json}}</pre>
-  </div>
 </form>
+
+<div class="text-success" *ngIf="submitted && !isResults">
+  <h3>Submission successful! </h3>
+</div>
+
+<button (click)="viewResults()" *ngIf="submitted && !isResults">Click and wait to view results</button>

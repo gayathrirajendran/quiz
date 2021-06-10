@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { QuizComponent } from './quiz.component';
 import { QuizRoutingModule } from './quiz-routing.module';
 import { QuizQuestionModule } from '../quiz-question/quiz-question.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -11,7 +12,9 @@ import { QuizQuestionModule } from '../quiz-question/quiz-question.module';
   imports: [
     CommonModule,
     QuizRoutingModule,
-    QuizQuestionModule
+    QuizQuestionModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     QuizComponent
