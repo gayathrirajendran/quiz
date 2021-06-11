@@ -255,6 +255,10 @@ export const QUESTIONS: FormConfig[] = [
         optionName: `['h', 'e', 'l', 'l', 'o', 'm', 'o']`,
         val: 'option 8',
       },
+      {
+        optionName: 'none of the above',
+        val: 'option 9'
+      }
     ],
     validators: {
       required: true
