@@ -118,8 +118,8 @@ export const QUESTIONS: FormConfig[] = [
     }
   },
   {
-    controlName: 'Microsoft has stopped IE support - Dream or reality',
-    placeholder: 'Microsoft has stopped IE support - Dream or reality',
+    controlName: 'Microsoft is stopping IE support - Dream or reality',
+    placeholder: 'Microsoft is stopping IE support - Dream or reality',
     controlType: 'radio',
     options: [
       {
@@ -143,15 +143,15 @@ export const QUESTIONS: FormConfig[] = [
     options: [
       {
         optionName: 'Loading module on demand',
-        val: '0'
+        val: 'option 1'
       },
       {
         optionName: 'Run time loading of components',
-        val: '1'
+        val: 'option 2'
       },
       {
         optionName: 'generates additional bundles for compatibility',
-        val: '2'
+        val: 'option 3'
       }
     ],
     validators: {
@@ -184,15 +184,15 @@ export const QUESTIONS: FormConfig[] = [
     options: [
       {
         optionName: 'linter for project configuration',
-        val: '0'
+        val: 'option 1'
       },
       {
         optionName: 'static code analysis',
-        val: '1'
+        val: 'option 2'
       },
       {
         optionName: 'build tool',
-        val: '2'
+        val: 'option 3'
       }
     ],
     validators: {
@@ -229,27 +229,27 @@ export const QUESTIONS: FormConfig[] = [
       },
       {
         optionName: `['h', 'e', 'l', 'l', 'o', 'm','o', 'r', 'n', 'i', 'n', 'g']`,
-        val: 'option 5',
+        val: 'option 2',
       },
       {
         optionName: 'hellom',
-        val: 'option 2'
-      },
-      {
-        optionName: `['h', 'e', 'l', 'l', 'o', 'm']`,
-        val: 'option 6',
-      },
-      {
-        optionName: 'hello',
         val: 'option 3'
       },
       {
+        optionName: `['h', 'e', 'l', 'l', 'o', 'm']`,
+        val: 'option 4',
+      },
+      {
+        optionName: 'hello',
+        val: 'option 5'
+      },
+      {
         optionName: `['h', 'e', 'l', 'l', 'o']`,
-        val: 'option 7',
+        val: 'option 6',
       },
       {
         optionName: 'hellomo',
-        val: 'option 4'
+        val: 'option 7'
       },
       {
         optionName: `['h', 'e', 'l', 'l', 'o', 'm', 'o']`,
