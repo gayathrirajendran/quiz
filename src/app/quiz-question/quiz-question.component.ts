@@ -28,6 +28,7 @@ export class QuizQuestionComponent implements OnInit {
   isResults = false;
 
   ANSWERS = ANSWERS;
+  unanswered = false;
 
   constructor(private store: AngularFirestore, private db: AngularFirestore) { }
 
@@ -71,6 +72,12 @@ export class QuizQuestionComponent implements OnInit {
   viewResults(): void {
 
     this.isResults = true;
+
+  }
+
+  showUnanswered(): void {
+
+    this.unanswered = !this.unanswered;
 
   }
 

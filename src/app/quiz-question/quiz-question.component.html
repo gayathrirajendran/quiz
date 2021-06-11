@@ -1,7 +1,7 @@
 <div *ngIf="isResults">
 
   Results:
-  <table>
+  <table class="results">
     <tr>
       <td>Name</td>
       <td>{{ form.value.userName }}</td>
@@ -117,11 +117,11 @@
 
   <button type="submit" *ngIf="!isResults" [disabled]="form.invalid || submitted">Submit</button>
 
-  <small>
-    Please select answers for the following to submit
-    <ng-container *ngFor="let control of form.controls | invalidOnes">
-      <div>{{ control }}</div>
-    </ng-container>
+  <small *ngIf="unanswered">
+    Submission would be enabled only when all questions are answered.
+    Please submit answers and wait for a moment.
+    There will be a view results button below, click on it and scroll to the top to view your score.
+    If less than 10, go through to identify difference between correct answer and your answer.
   </small>
 
 </form>
